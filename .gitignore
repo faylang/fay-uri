@@ -1,0 +1,6 @@
+*.hi
+*.o
+cabal-dev
+*.html
+*.js
+dist
