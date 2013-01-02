@@ -3,8 +3,8 @@
 
 module Language.Fay.Uri where
 
-import Language.Fay.FFI
-import Language.Fay.Prelude
+import           Language.Fay.FFI
+import           Language.Fay.Prelude
 
 -- Creation and conversion
 

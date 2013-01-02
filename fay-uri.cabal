@@ -12,6 +12,7 @@ category:            Web
 build-type:          Simple
 cabal-version:       >=1.8
 
+-- This is needed to place the source files in ~/.cabal/share so that we can use fay --include to use the file.
 data-files:
   src/Language/Fay/Uri.hs
 
