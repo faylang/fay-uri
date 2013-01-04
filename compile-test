@@ -5,4 +5,4 @@ if [ ! -e "Uri.js" ]
     curl -o Uri.js https://raw.github.com/derek-watson/jsUri/master/Uri.js
 fi
 
-fay --include src --html-wrapper --html-js-lib Uri.js test.hs
+fay --include src --html-wrapper --html-js-lib Uri.js --closure test.hs
