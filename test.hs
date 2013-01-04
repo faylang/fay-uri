@@ -1,5 +1,6 @@
 module Main where
 
+import Language.Fay.FFI
 import Language.Fay.Uri
 import Language.Fay.Prelude
 
@@ -9,8 +10,8 @@ main = do
   putStrLn . toString . newUri =<< currentUri
   print uri
   putStrLn "--"
-  mapM_ (putStrLn . ($ uri))
-    [toString, protocol, host, port, path, query, anchor]
+  mapM_ (putStrLn . ($ uri)) $
+    toString : map (fromNullable .) [protocol, host, port, path, query, anchor]
   putStrLn "--"
   mapM_ (putStrLn . toString . ($ uri))
     [withProtocol "https", withUserInfo "foo:bar", withHost "example.net", withPort "90", withPath "path", withQuery "e=f", withAnchor "g"]
@@ -21,3 +22,16 @@ main = do
   mapM_ (putStrLn . toString . ($ uri))
     [addQueryParam "c" "d", replaceQueryParam "a" "e", replaceQueryParamValue "a" "b" "f"
     ,deleteQueryParam "a", deleteQueryParamValue "a" "b"]
+  putStrLn "--"
+  mapM_ (putStrLn . ($ uri)) $ map (fromNullable .)
+    [protocol . removeProtocol
+    ,userInfo . removeUserInfo
+    ,host     . removeHost
+    ,port     . removePort
+    ,path     . removePath
+    ,query    . removeQuery
+    ,anchor   . removeAnchor]
+
+fromNullable :: Nullable String -> String
+fromNullable Null = "null"
+fromNullable (Nullable s) = "'" ++ s ++ "'"

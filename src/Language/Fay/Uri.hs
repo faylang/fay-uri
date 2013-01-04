@@ -6,12 +6,13 @@ module Language.Fay.Uri where
 import           Language.Fay.FFI
 import           Language.Fay.Prelude
 
--- Creation and conversion
+-- | Creation and conversion
 
 -- Choose to make Uri an opaque data type. If the accessors on the
 -- jsUri objects were properties and not functions we could have
 -- defined Uri as a record instead.
 data Uri
+-- The Foreign declaration lets us use Uri in the FFI
 instance Foreign Uri
 
 -- To make Google Closure play nice we use [] instead of . for accessing properties.
@@ -25,30 +26,33 @@ newUri = ffi "new window['Uri'](%1)"
 toString :: Uri -> String
 toString = ffi "%1['toString']()"
 
--- Getters
+-- | Getters
 
-protocol :: Uri -> String
+-- All getters (except query! But lets be consistent) may return null if the value isn't set so we use
+-- Language.FFI.Nullable here which converts null -> Null and String -> Nullable String
+
+protocol :: Uri -> Nullable String
 protocol = ffi "%1['protocol']()"
 
-userInfo :: Uri -> String
+userInfo :: Uri -> Nullable String
 userInfo = ffi "%1['userInfo']()"
 
-host :: Uri -> String
+host :: Uri -> Nullable String
 host = ffi "%1['host']()"
 
-port :: Uri -> String
+port :: Uri -> Nullable String
 port = ffi "%1['port']()"
 
-path :: Uri -> String
+path :: Uri -> Nullable String
 path = ffi "%1['path']()"
 
-query :: Uri -> String
+query :: Uri -> Nullable String
 query = ffi "%1['query']()"
 
-anchor :: Uri -> String
+anchor :: Uri -> Nullable String
 anchor = ffi "%1['anchor']()"
 
--- Other getters
+-- | Other getters
 
 queryParamValue :: String -> Uri -> String
 queryParamValue = ffi "%2['getQueryParamValue'](%1)"
@@ -56,11 +60,10 @@ queryParamValue = ffi "%2['getQueryParamValue'](%1)"
 queryParamValues :: String -> Uri -> [String]
 queryParamValues = ffi "%2['getQueryParamValues'](%1)"
 
--- Setters
+-- | Setters
 
--- We could use Language.FFI.Nullable here to combine the with* and remove* functions
+-- We could use Nullable here to combine the with* and remove* functions
 -- but usage would be more verbose that way.
--- `Nullable a` is converted to `a` through the FFI and `Null` is converted to null.
 
 -- JsUri has clone() conveniently defined so we use it to get
 -- persistence, otherwise our types would be `-> Fay Uri` which is of
@@ -87,7 +90,7 @@ withQuery = ffi "%2['clone']()['setQuery'](%1)"
 withAnchor :: String -> Uri -> Uri
 withAnchor = ffi "%2['clone']()['setAnchor'](%1)"
 
--- Removals
+-- | Removals
 
 removeProtocol :: Uri -> Uri
 removeProtocol = ffi "%1['clone']()['setProtocol'](null)"
@@ -111,7 +114,7 @@ removeAnchor :: Uri -> Uri
 removeAnchor = ffi "%1['clone']()['setAnchor'](null)"
 
 
--- Other setters
+-- | Other setters
 
 addQueryParam :: String -> String -> Uri -> Uri
 addQueryParam = ffi "%3['clone']()['addQueryParam'](%1,%2)"
