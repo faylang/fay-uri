@@ -26,6 +26,10 @@ newUri = ffi "new window['Uri'](%1)"
 toString :: Uri -> String
 toString = ffi "%1['toString']()"
 
+-- If we ever want to pass a Uri back to JS we need to make sure we keep persistance internally.
+clone :: Uri -> Uri
+clone = ffi "%1['clone']()"
+
 -- | Getters
 
 -- All getters (except query! But lets be consistent) may return null if the value isn't set so we use
