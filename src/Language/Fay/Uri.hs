@@ -29,8 +29,11 @@ toString = ffi "%1['toString']()"
 -- | Getters
 
 -- All getters (except query! But lets be consistent) may return null if the value isn't set so we use
--- Language.FFI.Nullable here which converts null -> Null and String -> Nullable String
-
+-- Language.FFI.Nullable here which converts null -> Null and String -> Nullable String.
+-- Nullable is distinguished from Maybe to not break haskell compatibility.
+-- If we want to decode null into Nullable (Nullable a) there is no way of
+-- knowing if Null or Nullable Null is correct. This problem does not exist when
+-- working with Maybe values in client server communication.
 protocol :: Uri -> Nullable String
 protocol = ffi "%1['protocol']()"
 
