@@ -33,5 +33,5 @@ import Language.Fay.Prelude
 import Language.Fay.Uri
 
 main :: Fay ()
-main = putStrLn . removePath . withProtocol "https" =<< currentUri
+main = putStrLn . toString . removePath . withProtocol "https" . newUri =<< currentUri
 ```
