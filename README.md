@@ -22,8 +22,14 @@ To use this with fay, cabal install the package which will put the
 source files in fay ~/.cabal/share/fay-uri-0.1.0.0/src. You can then
 compile with fay using
 
+in fay >= 0.12:
 ```bash
-fay --include=~/.cabal/share/fay-uri-0.1.0.0/src MyFile.hs
+fay --package fay-uri MyFile.hs
+```
+
+in fay < 0.12:
+```bash
+fay --include ~/.cabal/share/fay-uri-0.1.0.0/src MyFile.hs
 ```
 
 Example
