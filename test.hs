@@ -1,8 +1,8 @@
 module Main where
 
-import Language.Fay.FFI
-import Language.Fay.Uri
-import Language.Fay.Prelude
+import FFI
+import Uri
+import Prelude
 
 main :: Fay ()
 main = do

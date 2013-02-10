@@ -1,5 +1,5 @@
 name:                fay-uri
-version:             0.1.0.0
+version:             0.2.0.0
 synopsis:            Persistent FFI bindings for using jsUri in Fay
 homepage:            https://github.com/faylang/fay-uri
 bug-reports:         https://github.com/faylang/fay-uri/issues
@@ -11,14 +11,9 @@ copyright:           2013 Adam Bergmark
 category:            Web
 build-type:          Simple
 cabal-version:       >=1.8
-
--- This is needed to place the source files in ~/.cabal/share so that we can use fay --include to use the file.
-data-files:
-  src/Language/Fay/Uri.hs
+data-files:          src/Uri.hs
 
 library
   hs-source-dirs: src
-  exposed-modules: Language.Fay.Uri
-                   Paths_fay_uri
-  build-depends: base,
-                 fay
+  exposed-modules: Uri
+  build-depends: fay-base

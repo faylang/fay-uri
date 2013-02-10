@@ -1,10 +1,9 @@
 {-# Language EmptyDataDecls    #-}
-{-# Language NoImplicitPrelude #-}
 
-module Language.Fay.Uri where
+module Uri where
 
-import           Language.Fay.FFI
-import           Language.Fay.Prelude
+import FFI
+import Prelude
 
 -- | Creation and conversion
 
@@ -12,8 +11,6 @@ import           Language.Fay.Prelude
 -- jsUri objects were properties and not functions we could have
 -- defined Uri as a record instead.
 data Uri
--- The Foreign declaration lets us use Uri in the FFI
-instance Foreign Uri
 
 -- To make Google Closure play nice we use [] instead of . for accessing properties.
 currentUri :: Fay String
