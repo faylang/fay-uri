@@ -8,12 +8,17 @@ license-file:        LICENSE
 author:              Adam Bergmark
 maintainer:          adam@edea.se
 copyright:           2013 Adam Bergmark
-category:            Web
+category:            Web, Fay
 build-type:          Simple
 cabal-version:       >=1.8
 data-files:          src/Uri.hs
 
+source-repository head
+  type: git
+  location: https://github.com/faylang/fay-uri.git
+
 library
   hs-source-dirs: src
+  ghc-options: -Wall
   exposed-modules: Uri
-  build-depends: fay-base
+  build-depends: fay-base >= 0.16
