@@ -6,7 +6,7 @@ bug-reports:         https://github.com/faylang/fay-uri/issues
 license:             BSD3
 license-file:        LICENSE
 author:              Adam Bergmark
-maintainer:          adam@edea.se
+maintainer:          adam@bergmark.nl
 copyright:           2013 Adam Bergmark
 category:            Web, Fay
 build-type:          Simple
